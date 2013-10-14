@@ -1,5 +1,5 @@
 #!/bin/bash
-#Pinperepette
+#Pinperepette --edited by eleve11
 #########################################################################
 #  This program is free software; you can redistribute it and/or modify #
 #  it under the terms of the GNU General Public License as published by #
@@ -70,6 +70,9 @@ check_software() {
 ########################################################################
 ###############                 SCRIPT                     #############
 ########################################################################
+#avviso prescript
+`zenity --warning --text="Prepara un file.txt contenente il testo della mail prima di continuare. (Puoi salvarlo in una directory qualunque)."`
+#inizio script
 check_software
 #put the service you want to use
 host=out.alice.it
@@ -89,7 +92,12 @@ echo "from: <"`zenity --entry --title="$prog - Enter the name of the sender" --t
 echo "to: <"`zenity --entry --title="$prog - Enter the name of the recipient" --text="Enter the name of the recipient"`">" "<"`zenity --entry --title="$prog - Insert the Mail of recipient" --text="Insert the Mail of recipient"`">"
 echo "subject: <"`zenity --entry --title="$prog - Insert the subject" --text="Insert the subject"`">"
 sleep 2
-echo "<" `zenity --entry --title="$prog - text of the mail" --text="text of the mail"` ">"
+#scegli file di testo
+file=`zenity --file-selection \
+	--title="Scegli file testo contenuto mail"`
+#contenuto mail e invio
+echo "<" `zenity   --text-info \ --title="$prog - Insert the content of mail" \
+                   --filename=$file \ --editable 2>/tmp/tmp.txt`">"
 echo "."
 sleep 10
 )| telnet
